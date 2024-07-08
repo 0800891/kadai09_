@@ -77,8 +77,7 @@ if(isset($_POST['name'])){
         sql_error($stmt);
     } else {
         //５．index.phpへリダイレクト
-      header('Location: select.php');
-      exit();
-    
+      redirect('select.php');
+
     }
     ?>

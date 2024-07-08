@@ -31,3 +31,14 @@ function redirect($file_name){
   header('Location:'. $file_name);
   exit();
 }
+
+// ログインチェク処理 loginCheck()
+function loginCheck(){
+  if (!isset($_SESSION['chk_ssid']) || $_SESSION['chk_ssid'] !== session_id()) {
+      exit('LOGIN ERROR');
+  }
+  session_regenerate_id(true);
+  $_SESSION['chk_ssid'] = session_id();
+}
+
+?>

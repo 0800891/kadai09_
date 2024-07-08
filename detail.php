@@ -1,7 +1,11 @@
 <?php
+session_start();
 require_once('funcs.php');
+loginCheck();
+
 $id = $_GET['id'];
 $pdo = db_conn();
+
 //２．データ詳細表示SQL作成
 $stmt = $pdo->prepare('SELECT * FROM gs_bm_table_r1 WHERE id = :id;');
 $stmt -> bindValue(':id', $id, PDO::PARAM_INT);
@@ -26,7 +30,7 @@ var_dump($result);
 
 <head>
     <meta charset="UTF-8">
-    <title>課題_ブックマーク2</title>
+    <title>データ更新</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <style>
         div {
@@ -52,15 +56,14 @@ var_dump($result);
     <!-- <form method="POST" action="insert.php"> -->
         <div class="jumbotron">
             <fieldset>
-                <legend>ブックマーク</legend>
+                <legend>[編集]</legend>
                 <label>名前　　：<input type="text" name="name" id="name" value="<?= $result['name']?>"></label><br>
                 <label>URL　　：<input type="text" name="URL" id="URL" value="<?= $result['URL']?>"></label><br>
                 <label>コメント：<textArea name="comment" rows="4" cols="40" id="comment" value="<?= $result['comment']?>"><?= $result['comment']?></textArea></label><br>
                 <label><img src ="<?=$result['image']?>" alt = 'デーコードされた画像' width='100%' height='100%'></label><br>
                 <label id="img_text">登録したい画像のファイルを選択してください</label><br>
                 <label><input type="file" id="imgUpload"></label><br>
-                <!-- <label><input type="hidden" name="id" value="<?= $result['id']?>"></label><br> -->
-                <label><input name="id" value="<?= $result['id']?>"></label><br>
+                <label><input type="hidden" name="id" value="<?= $id?>"></label><br>
 
 
                 <!-- <input type="submit" value="送信"> -->

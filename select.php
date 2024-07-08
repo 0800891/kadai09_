@@ -1,5 +1,7 @@
 <?php
+session_start();
 require_once('funcs.php');
+loginCheck();
 // クロスサイトスクリプティング対策　-> funcs.phpに格納して、他のページでも使うときは、呼び出すようにする
 // function h($str) {
 //   return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
@@ -40,7 +42,12 @@ if ($status==false) {
     $view .= '<td>' . h($result['comment']) .  '</td>' ;
     $view .= '<td width="10px">' . h($result['URL']) .  '</td>' ;
     $view .= '<td>' . h($result['date']) .  '</td>' ;
+
+  
+    if($_SESSION['kanri']=== 1){  
     $view .= '<td><a href = delete.php?id=' . h($result['id']) .  '>delete</a></td>' ;
+    }
+
     $view .= "</tr>";
   }
   

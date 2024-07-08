@@ -56,7 +56,8 @@ if($status === false) {
     sql_error($stmt);
 } else {
     //５．index.phpへリダイレクト
-  header('Location: index.php');
+  // header('Location: index.php');
+  redirect('index.php');
 
 }
 ?>
