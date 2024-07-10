@@ -65,8 +65,6 @@ var_dump($result);
                 <label><input type="file" id="imgUpload"></label><br>
                 <label><input type="hidden" name="id" id="id" value="<?= $result['id']?>"></label><br>
 
-
-                <!-- <input type="submit" value="送信"> -->
             </fieldset>
         </div>
     <!-- </form> -->
@@ -116,8 +114,6 @@ $("#show").on("click", function(){
            console.dir(file);        //onload 読み込みが終わったときに発火する
            
            let photo = reader.result;  //読み込んだ画像ファイルを格納
-        //    let photo_01 = photo.replace("/","!");
-        //    let photo_02 = photo.replace("+","-");
            let img_src = photo;
            if(img_src==undefined){
             let img_src = "<?=$result['image']?>";
@@ -133,8 +129,6 @@ $("#show").on("click", function(){
    
  }
  window.location.href = 'update.php'; 
-    // console.log(file==undefined,"file");
-    // window.location.href = 'select.php'; 
 
 })
 </script>

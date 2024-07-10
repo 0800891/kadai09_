@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>課題_ブックマーク</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="test.css">
     <style>
         div {
             padding: 10px;
@@ -22,6 +23,7 @@
                 <div class="navbar-header"><a class="navbar-brand" href="select.php">データ一覧</a></div>
                 <div class="navbar-header"><a class="navbar-brand" href="login.php">ログイン</a></div>
                 <div class="navbar-header"><a class="navbar-brand" href="logout.php">ログアウト</a></div>
+                <div class="navbar-header"><a class="navbar-brand" href="signup.php">サインアップ</a></div>
             </div>
         </nav>
     </header>

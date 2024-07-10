@@ -18,6 +18,7 @@ function db_conn(){
   }   
 }
 
+
 function sql_error($stmt){
   $error = $stmt->errorInfo();
   exit('SQLError:' . print_r($error, true));

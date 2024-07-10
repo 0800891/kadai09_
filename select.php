@@ -40,37 +40,39 @@ if ($status==false) {
     $view .= '<td><a href = "detail.php?id=' . h($result['id']) .'">';
     $view .= h($result['id']) . '</a></td>' ;
     $view .= '<td><a href = "detail.php?id=' . h($result['id']) .'">' . h($result['name']) .  '</td>' ;
-
+    if(isset($_SESSION['kanri'])){
     if($_SESSION['kanri']=== 1 || $_SESSION['kanri']=== 0){  
     $view .= '<td><img src =' . h($result['image']) . 'alt = "デーコードされた画像" width="40%" height="40%"></td>' ;
     $view .= '<td>' . h($result['comment']) .  '</td>' ;
-  }
+  }}
 
     $view .= '<td width="10px">' . h($result['URL']) .  '</td>' ;
     $view .= '<td>' . h($result['date']) .  '</td>' ;
 
-  
+    if(isset($_SESSION['kanri'])){
     if($_SESSION['kanri']=== 1){  
     $view .= '<td><a href = delete.php?id=' . h($result['id']) .  '>delete</a></td>' ;
     }
-
+  }
     $view .= "</tr>";
   }
 // view2 
     $view2 .= "<td>id</td>";
     $view2 .= '<td>name</td>';
    
-
+    if(isset($_SESSION['kanri'])){
     if($_SESSION['kanri']=== 1 || $_SESSION['kanri']=== 0){  
       $view2 .= '<td>image</td>' ;
       $view2 .= '<td>comment</td>' ;
-  }
+  }}
 
     $view2 .= '<td>URL</td>' ;
     $view2 .= '<td>Date</td>';
+
+    if(isset($_SESSION['kanri'])){
     if($_SESSION['kanri']=== 1){  
-    $view2 .= '<td><a href = delete.php?id=' . h($result['id']) .  '>delete</a></td>' ;
-    }
+    $view2 .= '<td><a href = resetid.php? id=' . h($result['id']) .  '>id_Reset</a></td>' ;
+    }}
 
     $view2 .= "</tr>";
   }
