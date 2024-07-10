@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once('funcs.php');
-loginCheck();
+// loginCheck();
 // クロスサイトスクリプティング対策　-> funcs.phpに格納して、他のページでも使うときは、呼び出すようにする
 // function h($str) {
 //   return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
@@ -23,6 +23,7 @@ $status = $stmt->execute();
 
 //３．データ表示
 $view="";
+$view2="";
 if ($status==false) {
     //execute（SQL実行時にエラーがある場合）
   // $error = $stmt->errorInfo();
@@ -33,13 +34,18 @@ if ($status==false) {
   //Selectデータの数だけ自動でループしてくれる
   //FETCH_ASSOC=http://php.net/manual/ja/pdostatement.fetch.php
   while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
+    // view
     $view .= "<tr>";
     // $view .= h($result['id']) . h($result['date']) . ' ' . h($result['name']) . ' ' . h($result['URL']) . ' ' . h($result['comment']);
     $view .= '<td><a href = "detail.php?id=' . h($result['id']) .'">';
     $view .= h($result['id']) . '</a></td>' ;
     $view .= '<td><a href = "detail.php?id=' . h($result['id']) .'">' . h($result['name']) .  '</td>' ;
+
+    if($_SESSION['kanri']=== 1 || $_SESSION['kanri']=== 0){  
     $view .= '<td><img src =' . h($result['image']) . 'alt = "デーコードされた画像" width="40%" height="40%"></td>' ;
     $view .= '<td>' . h($result['comment']) .  '</td>' ;
+  }
+
     $view .= '<td width="10px">' . h($result['URL']) .  '</td>' ;
     $view .= '<td>' . h($result['date']) .  '</td>' ;
 
@@ -50,9 +56,26 @@ if ($status==false) {
 
     $view .= "</tr>";
   }
-  
+// view2 
+    $view2 .= "<td>id</td>";
+    $view2 .= '<td>name</td>';
+   
 
-}
+    if($_SESSION['kanri']=== 1 || $_SESSION['kanri']=== 0){  
+      $view2 .= '<td>image</td>' ;
+      $view2 .= '<td>comment</td>' ;
+  }
+
+    $view2 .= '<td>URL</td>' ;
+    $view2 .= '<td>Date</td>';
+    if($_SESSION['kanri']=== 1){  
+    $view2 .= '<td><a href = delete.php?id=' . h($result['id']) .  '>delete</a></td>' ;
+    }
+
+    $view2 .= "</tr>";
+  }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -84,7 +107,7 @@ if ($status==false) {
 <div>
 
   <table width="80%" border = "1" style = "border-collapse: collapse">
-    <tr>
+    <!-- <tr>
       <td>id</td>
       <td>name</td>
       <td>image</td>
@@ -92,7 +115,8 @@ if ($status==false) {
       <td>URL</td>
       <td>Date</td>
       <td><a href = resetid.php?>id_Reset</a></td>
-    </tr>
+    </tr> -->
+    <?= $view2 ?>
     <div class="container jumbotron">
       <a href="detail.php"></a>
       <?= $view ?>

@@ -1,23 +1,23 @@
 <?php
 require_once('funcs.php');
-
+// session_start();
+// loginCheck();
 // //1. POSTデータ取得
-if(isset($_POST['name'])){
+// if(isset($_POST['name'])){
     $name = $_POST['name'];
-    echo $name ;
-    }
-    if(isset($_POST['URL'])){
+    // }
+    // if(isset($_POST['URL'])){
     $URL = $_POST['URL'];
-    }
-    if(isset($_POST['comment'])){
+    // }
+    // if(isset($_POST['comment'])){
     $comment = $_POST['comment'];
-    }
-    if(isset($_POST['image'])){
+    // }
+    // if(isset($_POST['image'])){
     $image = $_POST['image'];
-    }
-    if(isset($_POST['id'])){
+    // }
+    // if(isset($_POST['id'])){
         $id = $_POST['id'];
-        }
+        // }
 // if(isset($_GET['name'])){
 //     $name = $_GET['name'];
 //     echo $name ;
@@ -46,12 +46,11 @@ if(isset($_POST['name'])){
     
     //３．データ登録SQL作成
     $stmt = $pdo->prepare('UPDATE
-                                gs_bm_table_r1
-                            SET  
-                                name = :name,
+                                `gs_bm_table_r1`
+                            SET name = :name,
                                 URL = :URL, 
-                                comment= :comment,
-                                image= :image,
+                                comment = :comment,
+                                image = :image,
                                 date = now()
                             WHERE 
                                 id = :id; 

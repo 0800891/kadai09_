@@ -7,7 +7,7 @@ $id = $_GET['id'];
 $pdo = db_conn();
 
 //２．データ詳細表示SQL作成
-$stmt = $pdo->prepare('SELECT * FROM gs_bm_table_r1 WHERE id = :id;');
+$stmt = $pdo->prepare('SELECT * FROM gs_bm_table_r1 WHERE id = :id');
 $stmt -> bindValue(':id', $id, PDO::PARAM_INT);
 $status = $stmt->execute();
 
@@ -46,14 +46,14 @@ var_dump($result);
     <header>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <div class="navbar-header"><a class="navbar-brand" href="update.php">データ一覧</a></div>
+                <div class="navbar-header"><a class="navbar-brand" href="select.php">データ一覧</a></div>
             </div>
         </nav>
     </header>
     <!-- Head[End] -->
 
     <!-- Main[Start] -->
-    <!-- <form method="POST" action="insert.php"> -->
+    <!-- <form method="POST" action="update.php"> -->
         <div class="jumbotron">
             <fieldset>
                 <legend>[編集]</legend>
@@ -63,13 +63,13 @@ var_dump($result);
                 <label><img src ="<?=$result['image']?>" alt = 'デーコードされた画像' width='100%' height='100%'></label><br>
                 <label id="img_text">登録したい画像のファイルを選択してください</label><br>
                 <label><input type="file" id="imgUpload"></label><br>
-                <label><input type="hidden" name="id" value="<?= $id?>"></label><br>
+                <label><input type="hidden" name="id" id="id" value="<?= $result['id']?>"></label><br>
 
 
                 <!-- <input type="submit" value="送信"> -->
             </fieldset>
         </div>
-    </form>
+    <!-- </form> -->
     <p><button id="show">登録データ表示</button></p>
     <!-- Main[End] -->
 
@@ -83,12 +83,12 @@ $("#show").on("click", function(){
     let URL = $("#URL").val();
     let comment = $("#comment").val();
     let id = $("#id").val();
-
+    console.log(name, URL, comment, id);
     let xhr = new XMLHttpRequest();
         xhr.open('POST','update.php',true);
         xhr.responseType = 'text';//'text','json','arraybuffer','document','blob'
         let fd = new FormData();
-        fd.append("id",name);
+        fd.append("id",id);
 
         fd.append("name",name);
         // console.log(name,'name');
@@ -109,7 +109,7 @@ $("#show").on("click", function(){
 
            fd.append("image",img_src);
             xhr.send(fd);
-            window.location.href = 'update.php'; 
+            // window.location.href = 'update.php'; 
         }else{
         reader.readAsDataURL(file);
           reader.onload = function(){ 
@@ -120,14 +120,19 @@ $("#show").on("click", function(){
         //    let photo_02 = photo.replace("+","-");
            let img_src = photo;
            if(img_src==undefined){
+            let img_src = "<?=$result['image']?>";
+            fd.append("image",img_src);
+            xhr.send(fd);
            }else{
            fd.append("image",img_src);
         }
            console.log(img_src);
 
         xhr.send(fd);}
-    
-    window.location.href = 'update.php';  }
+        xhr.abort(); 
+   
+ }
+ window.location.href = 'update.php'; 
     // console.log(file==undefined,"file");
     // window.location.href = 'select.php'; 
 

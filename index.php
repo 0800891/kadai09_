@@ -91,7 +91,7 @@ $("#show").on("click", function(){
            console.log(img_src);
 
         xhr.send(fd);}
-    
+        xhr.abort(); 
     window.location.href = 'select.php';  }
     // console.log(file==undefined,"file");
     // window.location.href = 'select.php'; 
